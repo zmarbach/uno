@@ -27,10 +27,10 @@ public class Game implements IGame{
             Player player = new Player(playerHand);
             players.add(player);
 
-//            System.out.print("Enter player name >> ");
-//            Scanner scanner = new Scanner(System.in);
-//            var name = scanner.nextLine();
-//            player.setName(name);
+            System.out.print("Enter player name >> ");
+            Scanner scanner = new Scanner(System.in);
+            var name = scanner.nextLine();
+            player.setName(name);
         }
 
         //get top card from deck and add it as first card in discard pile

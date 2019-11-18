@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3fd81e69-5fe5-4be8-bda0-b1aa4ee9bd57" name="Default Changelist" comment="" />
+    <list default="true" id="3fd81e69-5fe5-4be8-bda0-b1aa4ee9bd57" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/UnoTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/UnoTests.class" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +23,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -25,7 +34,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1TKyGGh9QFH1OeWDNFaiK3gRegu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="settings.editor.selected.configurable" value="file.status.colors" />
   </component>
@@ -53,7 +64,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UnoTests.startingHandShouldHave7Cards">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.improving.bootcamp.Main" />
       <module name="uno" />
@@ -108,10 +119,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.UnoTests.startingHandShouldHave7Cards" />
         <item itemvalue="JUnit.UnoTests" />
         <item itemvalue="JUnit.UnoTests.drawTopCardShouldRemovesCardFromDeck" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.UnoTests.playerDrawCardShouldRemoveCardFromDrawPile" />
       </list>
     </recent_temporary>
@@ -128,6 +139,17 @@
       <updated>1573222983780</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
