@@ -1,4 +1,4 @@
-package com.improving.bootcamp;
+package com.improving;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,12 +11,12 @@ public class Deck implements IDeck{
 
     //deck needs to create cards in its constructor
     public Deck() {
-        for (var color : ColorEnum.values()) {
+        for (var color : Colors.values()) {
             //create all regular color cards
-            if (color != ColorEnum.WILD) {
-                for (var face : FaceEnum.values()) {
+            if (color != Colors.WILD) {
+                for (var face : Faces.values()) {
                     //only create all 4 colors for faces that are NOT wild or Draw 4
-                    if (face != FaceEnum.WILD && face != FaceEnum.DRAW_FOUR) {
+                    if (face != Faces.WILD && face != Faces.DRAW_FOUR) {
                         var card = new Card(face, color);
                         //add each of these cards twice
                         for (int i = 0; i < 2; i++) {
@@ -27,10 +27,10 @@ public class Deck implements IDeck{
             }
 
                 //create all WILD color cards
-            if (color == ColorEnum.WILD) {
-                for (var face : FaceEnum.values()) {
+            if (color == Colors.WILD) {
+                for (var face : Faces.values()) {
                     //only create WILD color cards for WILD and DRAW FOUR face
-                    if (face == FaceEnum.WILD || face == FaceEnum.DRAW_FOUR) {
+                    if (face == Faces.WILD || face == Faces.DRAW_FOUR) {
                         var card = new Card(face, color);
                         //add each of these cards 4 times
                         for (int i = 0; i < 4; i++) {
@@ -77,8 +77,6 @@ public class Deck implements IDeck{
         var newDiscardPile = new ArrayList<Card>();
         newDiscardPile.add(topCardFromDrawPile);
         this.setDiscardPile(newDiscardPile);
-
-        //put
     }
 
     public List<Card> shuffle (List<Card> cardsToShuffle){

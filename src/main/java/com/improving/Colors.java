@@ -1,6 +1,6 @@
-package com.improving.bootcamp;
+package com.improving;
 
-public enum ColorEnum {
+public enum Colors {
     RED (1),
     BLUE (2),
     YELLOW (3),
@@ -9,7 +9,7 @@ public enum ColorEnum {
 
     private final Integer value;
 
-    ColorEnum(Integer value) {
+    Colors(Integer value) {
         this.value = value;
     }
 

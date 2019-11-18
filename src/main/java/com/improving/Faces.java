@@ -1,6 +1,6 @@
-package com.improving.bootcamp;
+package com.improving;
 
-public enum FaceEnum {
+public enum Faces {
     ZERO(0),
     ONE (1),
     TWO(2),
@@ -19,7 +19,7 @@ public enum FaceEnum {
 
     private final Integer value;
 
-    FaceEnum(Integer value) {
+    Faces(Integer value) {
         this.value = value;
     }
 

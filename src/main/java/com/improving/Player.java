@@ -1,4 +1,4 @@
-package com.improving.bootcamp;
+package com.improving;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,14 +12,14 @@ public class Player implements IPlayer {
         this.hand = hand;
     }
 
-    public void takeTurn(Game game) {
+    public void takeTurn(IGame iGame) {
     //do this if not Draw 4 or Draw 2 cards
     for (Card card : hand) {
-        if (game.isPlayable(card)) {
-            if(card.getColor().equals(ColorEnum.WILD)) {
+        if (iGame.isPlayable(card)) {
+            if(card.getColor().equals(Colors.WILD)) {
                 var newColor = this.chooseNewColorToDeclare();
                 hand.remove(card);
-                game.playCard(card, Optional.of(newColor));
+                iGame.playCard(card, Optional.of(newColor));
 
                 System.out.print("cards in hand for " + this.name + " : ");
                 System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
@@ -27,27 +27,28 @@ public class Player implements IPlayer {
             }
             else {
                 hand.remove(card);
-                game.playCard(card,null);
+                iGame.playCard(card,null);
 
                 System.out.print("cards in hand for " + this.name + " : ");
                 System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
                 return;
+
             }
         }
     }
     //if CANNOT play then draw...if card matches top card on discardPile, if so play
-        var cardDrawn = this.draw(game);
+        var cardDrawn = this.draw(iGame);
         System.out.println(this.name + " drew a card");
-        if (game.isPlayable(cardDrawn)) {
-            if(cardDrawn.getColor().equals(ColorEnum.WILD)) {
+        if (iGame.isPlayable(cardDrawn)) {
+            if(cardDrawn.getColor().equals(Colors.WILD)) {
                 var newColor = this.chooseNewColorToDeclare();
                 hand.remove(cardDrawn);
-                game.playCard(cardDrawn, Optional.of(newColor));
+                iGame.playCard(cardDrawn, Optional.of(newColor));
                 System.out.println(this.name + " played " + cardDrawn + " after drawing ");
             }
             else {
                 hand.remove(cardDrawn);
-                game.playCard(cardDrawn,null);
+                iGame.playCard(cardDrawn,null);
                 System.out.println(this.name + " played " + cardDrawn + " after drawing ");
             }
         }
@@ -62,8 +63,8 @@ public class Player implements IPlayer {
     }
 
 
-    public Card draw(Game game) {
-        var cardDrawn = game.draw();
+    public Card draw(IGame iGame) {
+        var cardDrawn = iGame.draw();
         hand.add(cardDrawn);
         return cardDrawn;
     }
@@ -72,14 +73,14 @@ public class Player implements IPlayer {
         return hand.size();
     }
 
-    private ColorEnum chooseNewColorToDeclare() {
-        ColorEnum newColor;
-        var firstNonWildCardInHand = hand.stream().filter(c -> c.getColor() != ColorEnum.WILD).findFirst().orElse(null);
+    private Colors chooseNewColorToDeclare() {
+        Colors newColor;
+        var firstNonWildCardInHand = hand.stream().filter(c -> c.getColor() != Colors.WILD).findFirst().orElse(null);
 
         if (firstNonWildCardInHand != null) {
             newColor = firstNonWildCardInHand.getColor();
         } else {
-            newColor = ColorEnum.RED;
+            newColor = Colors.RED;
         }
         return newColor;
     }

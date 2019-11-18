@@ -1,4 +1,4 @@
-package com.improving.bootcamp;
+package com.improving;
 
 import java.util.Scanner;
 

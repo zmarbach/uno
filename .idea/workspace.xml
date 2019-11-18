@@ -2,10 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fd81e69-5fe5-4be8-bda0-b1aa4ee9bd57" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/improving/IPlayerInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/ColorEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/FaceEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Faces.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/GameOverException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/GameOverException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/IDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/IDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/IGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/IGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/IPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/IPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/UnoTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UnoTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/Card.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/ColorEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/Deck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/FaceEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/GameOverException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/IDeck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/IGame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/IPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/bootcamp/Player.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/UnoTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/UnoTests.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,7 +85,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.UnoTests">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.improving.Main" />
+      <module name="uno" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.improving.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.improving.bootcamp.Main" />
       <module name="uno" />
@@ -97,16 +131,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UnoTests.playerDrawCardShouldRemoveCardFromDrawPile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="uno" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UnoTests" />
-      <option name="METHOD_NAME" value="playerDrawCardShouldRemoveCardFromDrawPile" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="UnoTests.startingHandShouldHave7Cards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="uno" />
       <option name="PACKAGE_NAME" value="" />
@@ -119,11 +143,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UnoTests" />
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.UnoTests.startingHandShouldHave7Cards" />
-        <item itemvalue="JUnit.UnoTests" />
         <item itemvalue="JUnit.UnoTests.drawTopCardShouldRemovesCardFromDeck" />
-        <item itemvalue="JUnit.UnoTests.playerDrawCardShouldRemoveCardFromDrawPile" />
       </list>
     </recent_temporary>
   </component>
@@ -155,22 +179,22 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Game.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/Game.java</url>
           <line>39</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Player.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/Player.java</url>
           <line>17</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Player.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/Player.java</url>
           <line>29</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/improving/bootcamp/Player.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/Player.java</url>
           <line>27</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>

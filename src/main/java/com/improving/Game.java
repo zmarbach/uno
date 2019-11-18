@@ -1,4 +1,4 @@
-package com.improving.bootcamp;
+package com.improving;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Game implements IGame{
     Deck deck = new Deck();
     List<Player> players = new ArrayList<>();
-    Optional<ColorEnum> namedColor;
+    Optional<Colors> namedColor;
     int numOfPlayers;
     int turnEngine;
     int turnDirection;
@@ -15,9 +15,7 @@ public class Game implements IGame{
 
     public Game(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
-    }
 
-    public void play() {
         //create hands for each player and add them to list of players
         for (int i = 0; i < numOfPlayers; i++) {
             var playerHand = createHand(deck, new ArrayList<>());
@@ -32,7 +30,9 @@ public class Game implements IGame{
             var name = scanner.nextLine();
             player.setName(name);
         }
+    }
 
+    public void play() {
         //get top card from deck and add it as first card in discard pile
         var startingDiscardPileCard = deck.getDrawPile().get(deck.getDrawPile().size() - 1);
         deck.getDrawPile().remove(startingDiscardPileCard);
@@ -44,8 +44,8 @@ public class Game implements IGame{
         turnDirection = 1;
 
         //if first card if Wild then assign color Red to namedColor to start
-        if(startingDiscardPileCard.getColor().equals(ColorEnum.WILD)) {
-            namedColor = Optional.of(ColorEnum.RED);
+        if(startingDiscardPileCard.getColor().equals(Colors.WILD)) {
+            namedColor = Optional.of(Colors.RED);
             System.out.println("starting color was set to " + namedColor + " because first card was WILD color");
         }
 
@@ -74,7 +74,7 @@ public class Game implements IGame{
         }
     }
 
-    public void playCard(Card card, Optional<ColorEnum> newColor){
+    public void playCard(Card card, Optional<Colors> newColor){
         System.out.println(currentPlayer.getName() + " played " + card.toString());
         var discardPile = this.getDeck().getDiscardPile();
         discardPile.add(card);
@@ -83,7 +83,7 @@ public class Game implements IGame{
             performSpecialAction(card);
         }
 
-        if ((card.getColor() == ColorEnum.WILD) && (newColor.isPresent() == true)) {
+        if ((card.getColor() == Colors.WILD) && (newColor.isPresent() == true)) {
             setNamedColor(Optional.of(newColor).orElse(null));
             if(namedColor != null){
                 System.out.println("New Color set to...." + newColor.toString());
@@ -98,10 +98,10 @@ public class Game implements IGame{
 
     public boolean isPlayable(Card card) {
         if (namedColor != null) {
-            return (card.getColor().equals(ColorEnum.WILD) || (card.getColor().equals(namedColor.get())));
+            return (card.getColor().equals(Colors.WILD) || (card.getColor().equals(namedColor.get())));
         } else {
             Card topCardOnDiscardPile = deck.getDiscardPile().get(deck.getDiscardPile().size() - 1);
-            return (card.getColor().equals(ColorEnum.WILD)
+            return (card.getColor().equals(Colors.WILD)
                     || card.getColor().equals(topCardOnDiscardPile.getColor())
                     || card.getFace().equals(topCardOnDiscardPile.getFace()));
         }
@@ -135,7 +135,7 @@ public class Game implements IGame{
         int playerPosition = players.indexOf(currentPlayer);
         Player impactedPlayer;
         //DRAW TWO
-        if (card.getFace().equals(FaceEnum.DRAW_TWO)) {
+        if (card.getFace().equals(Faces.DRAW_TWO)) {
             if(turnCount == 0) {
                 currentPlayer.draw(this);
                 currentPlayer.draw(this);
@@ -163,7 +163,7 @@ public class Game implements IGame{
             turnEngine += turnDirection;
         }
         //DRAW FOUR
-        else if (card.getFace().equals(FaceEnum.DRAW_FOUR)) {
+        else if (card.getFace().equals(Faces.DRAW_FOUR)) {
             if(turnCount == 0) {
                 currentPlayer.draw(this);
                 currentPlayer.draw(this);
@@ -197,12 +197,12 @@ public class Game implements IGame{
             turnEngine += turnDirection;
         }
         //SKIP
-        else if (card.getFace().equals(FaceEnum.SKIP)) {
+        else if (card.getFace().equals(Faces.SKIP)) {
             System.out.println("SKIPPPPPPPPP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             turnEngine += turnDirection;
         }
         //REVERSE
-        else if (card.getFace().equals(FaceEnum.REVERSE)) {
+        else if (card.getFace().equals(Faces.REVERSE)) {
             System.out.println("REVERSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             //if turn direction is 1, this will change it to -1 (and vice versa)
             turnDirection *= -1;
@@ -215,10 +215,10 @@ public class Game implements IGame{
     }
 
     private boolean isSpecialCard(Card card) {
-        return (card.getFace().equals(FaceEnum.SKIP) ||
-                card.getFace().equals(FaceEnum.REVERSE) ||
-                card.getFace().equals(FaceEnum.DRAW_TWO) ||
-                card.getFace().equals(FaceEnum.DRAW_FOUR));
+        return (card.getFace().equals(Faces.SKIP) ||
+                card.getFace().equals(Faces.REVERSE) ||
+                card.getFace().equals(Faces.DRAW_TWO) ||
+                card.getFace().equals(Faces.DRAW_FOUR));
     }
 
     public int getDiscardPileSize() {
@@ -229,12 +229,58 @@ public class Game implements IGame{
         return deck.getDrawPile().size();
     }
 
-    public void setNamedColor(Optional<ColorEnum> namedColor) {
+    public void setNamedColor(Optional<Colors> namedColor) {
         this.namedColor = namedColor;
     }
 
     //for testing
     public int getPlayerHandSize(int playerIndex){
         return players.get(playerIndex).getHand().size();
+    }
+
+    @Override
+    public List<IPlayerInfo> getPlayerInfo() {
+        return new ArrayList<>(players);
+    }
+
+    @Override
+    public IDeck getDeckInfo() {
+        return deck;
+    }
+
+    @Override
+    public IPlayer getNextPlayer() {
+        //return first player if current player is last in list
+        if(players.indexOf(currentPlayer) == players.size() - 1){
+            return players.get(0);
+        }
+        //otherwise return player at next index
+        else {
+            return players.get(players.indexOf(currentPlayer) + 1);
+        }
+    }
+
+    @Override
+    public IPlayer getPreviousPlayer() {
+        //return last player in list if current player is first in list
+        if(players.indexOf(currentPlayer) == 0){
+            return players.get(players.size() - 1);
+        }
+        //otherwise return player at previous index
+        else {
+            return players.get(players.indexOf(currentPlayer) - 1);
+        }
+    }
+
+    @Override
+    public IPlayer getNextNextPlayer() {
+        //return first player if current player is last in list
+        if(players.indexOf(currentPlayer) == players.size() - 2){
+            return players.get(0);
+        }
+        //otherwise return player at next next index
+        else {
+            return players.get(players.indexOf(currentPlayer) + 2);
+        }
     }
 }

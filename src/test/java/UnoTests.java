@@ -1,6 +1,5 @@
 
-import com.improving.bootcamp.*;
-import com.improving.bootcamp.Deck;
+import com.improving.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -182,8 +181,8 @@ public class UnoTests {
             var firstCardInDeck = deck.getDrawPile().get(0);
             var lastCardInDeck = deck.getDrawPile().get(deck.getDrawPile().size() - 1);
 
-            var origFirstCardInDeck = new Card(FaceEnum.ZERO, ColorEnum.RED);
-            var origLastCardInDeck = new Card(FaceEnum.WILD, ColorEnum.WILD);
+            var origFirstCardInDeck = new Card(Faces.ZERO, Colors.RED);
+            var origLastCardInDeck = new Card(Faces.WILD, Colors.WILD);
 
             //assert
             assertNotEquals(origFirstCardInDeck, firstCardInDeck);

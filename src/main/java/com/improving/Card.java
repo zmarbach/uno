@@ -1,19 +1,19 @@
-package com.improving.bootcamp;
+package com.improving;
 
 public class Card {
-    private FaceEnum face;
-    private ColorEnum color;
+    private Faces face;
+    private Colors color;
 
-    public Card(FaceEnum face, ColorEnum color) {
+    public Card(Faces face, Colors color) {
         this.face = face;
         this.color = color;
     }
 
-    public FaceEnum getFace() {
+    public Faces getFace() {
         return face;
     }
 
-    public ColorEnum getColor() {
+    public Colors getColor() {
         return color;
     }
 
