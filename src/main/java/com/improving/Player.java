@@ -58,7 +58,7 @@ public class Player implements IPlayer {
 
     }
 
-    public List<Card> getHand() {
+    private List<Card> getHand() {
         return hand;
     }
 

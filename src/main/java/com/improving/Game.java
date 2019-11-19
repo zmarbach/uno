@@ -16,6 +16,18 @@ public class Game implements IGame{
     public Game(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
 
+        List<String> alphabet = new ArrayList<>();
+        alphabet.add("A");
+        alphabet.add("B");
+        alphabet.add("C");
+        alphabet.add("D");
+        alphabet.add("E");
+        alphabet.add("F");
+        alphabet.add("G");
+        alphabet.add("H");
+        alphabet.add("I");
+        alphabet.add("J");
+
         //create hands for each player and add them to list of players
         for (int i = 0; i < numOfPlayers; i++) {
             var playerHand = createHand(deck, new ArrayList<>());
@@ -24,12 +36,17 @@ public class Game implements IGame{
 
             Player player = new Player(playerHand);
             players.add(player);
-
-            System.out.print("Enter player name >> ");
-            Scanner scanner = new Scanner(System.in);
-            var name = scanner.nextLine();
-            player.setName(name);
+            player.setName(alphabet.get(i%10));
         }
+        currentPlayer = players.get(0);
+    }
+
+    //constructor ONLY for testing
+    public Game (List<Player> players, int turnCount, int turnDirection){
+        this.players.addAll(players);
+        currentPlayer = players.get(0);
+        this.turnCount = turnCount;
+        this.turnDirection = turnDirection;
     }
 
     public void play() {
@@ -50,7 +67,7 @@ public class Game implements IGame{
         }
 
         //establish first player in case first card requires action
-        currentPlayer = players.get(0);
+
         if(isSpecialCard(startingDiscardPileCard)){
             performSpecialAction(startingDiscardPileCard);
         }
@@ -83,17 +100,22 @@ public class Game implements IGame{
             performSpecialAction(card);
         }
 
-        if ((card.getColor() == Colors.WILD) && (newColor.isPresent() == true)) {
+        //TODO: use equals() R || Y || G || B....maybe create separate method called isValidColor()
+        //TODO: need to catch the BAD INPUT
+        //color declared must be null if Face is NOT WILD or DRAW FOUR...else throw "YouCheatedException"
+        //color declared must be valid color (R,B,G,Y,W)
+
+        if ((card.getColor() == Colors.WILD)) {
             setNamedColor(Optional.of(newColor).orElse(null));
             if(namedColor != null){
                 System.out.println("New Color set to...." + newColor.toString());
             }
         }
+        if((card.getColor() != Colors.WILD)){
+            setNamedColor(null);
+        }
 
-        //TODO: use equals() R || Y || G || B....maybe create separate method called isValidColor()
-        //TODO: need to catch the BAD INPUT
-            //color declared must be null if Face is NOT WILD or DRAW FOUR...else throw "YouCheatedException"
-            //color declared must be valid color (R,B,G,Y,W)
+
     }
 
     public boolean isPlayable(Card card) {
@@ -109,6 +131,49 @@ public class Game implements IGame{
 
     public Card draw() {
         return deck.draw();
+    }
+
+    @Override
+    public List<IPlayerInfo> getPlayerInfo() {
+        return new ArrayList<>(players);
+    }
+
+    @Override
+    public IDeck getDeckInfo() {
+        return deck;
+    }
+
+    public IPlayer getNextPlayer() {
+        //return first player if current player is last in list
+        if(players.indexOf(currentPlayer) == players.size() - 1){
+            return players.get(0);
+        }
+        //otherwise return player at next index
+        else {
+            return players.get(players.indexOf(currentPlayer) + 1);
+        }
+    }
+
+    public IPlayer getPreviousPlayer() {
+        //return last player in list if current player is first in list
+        if(players.indexOf(currentPlayer) == 0){
+            return players.get(players.size() - 1);
+        }
+        //otherwise return player at previous index
+        else {
+            return players.get(players.indexOf(currentPlayer) - 1);
+        }
+    }
+
+    public IPlayer getNextNextPlayer() {
+        //return first player if current player is last in list
+        if(players.indexOf(currentPlayer) == players.size() - 2){
+            return players.get(0);
+        }
+        //otherwise return player at next next index
+        else {
+            return players.get(players.indexOf(currentPlayer) + 2);
+        }
     }
 
     private Deck getDeck() {
@@ -221,66 +286,29 @@ public class Game implements IGame{
                 card.getFace().equals(Faces.DRAW_FOUR));
     }
 
-    public int getDiscardPileSize() {
-        return deck.getDiscardPile().size();
-    }
-
-    public int getDrawPileSize() {
-        return deck.getDrawPile().size();
-    }
-
-    public void setNamedColor(Optional<Colors> namedColor) {
+    private void setNamedColor(Optional<Colors> namedColor) {
         this.namedColor = namedColor;
     }
 
-    //for testing
-    public int getPlayerHandSize(int playerIndex){
-        return players.get(playerIndex).getHand().size();
+//    public int getDiscardPileSize() {
+//        return deck.getDiscardPile().size();
+//    }
+
+//    public int getDrawPileSize() {
+//        return deck.getDrawPile().size();
+//    }
+
+//    //for testing
+//    public int getPlayerHandSize(int playerIndex){
+//        return players.get(playerIndex).getHand().size();
+//    }
+
+
+    public void setTurnCount(int turnCount) {
+        this.turnCount = turnCount;
     }
 
-    @Override
-    public List<IPlayerInfo> getPlayerInfo() {
-        return new ArrayList<>(players);
-    }
-
-    @Override
-    public IDeck getDeckInfo() {
-        return deck;
-    }
-
-    @Override
-    public IPlayer getNextPlayer() {
-        //return first player if current player is last in list
-        if(players.indexOf(currentPlayer) == players.size() - 1){
-            return players.get(0);
-        }
-        //otherwise return player at next index
-        else {
-            return players.get(players.indexOf(currentPlayer) + 1);
-        }
-    }
-
-    @Override
-    public IPlayer getPreviousPlayer() {
-        //return last player in list if current player is first in list
-        if(players.indexOf(currentPlayer) == 0){
-            return players.get(players.size() - 1);
-        }
-        //otherwise return player at previous index
-        else {
-            return players.get(players.indexOf(currentPlayer) - 1);
-        }
-    }
-
-    @Override
-    public IPlayer getNextNextPlayer() {
-        //return first player if current player is last in list
-        if(players.indexOf(currentPlayer) == players.size() - 2){
-            return players.get(0);
-        }
-        //otherwise return player at next next index
-        else {
-            return players.get(players.indexOf(currentPlayer) + 2);
-        }
+    public void setTurnDirection(int turnDirection) {
+        this.turnDirection = turnDirection;
     }
 }
