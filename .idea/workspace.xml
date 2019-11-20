@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3fd81e69-5fe5-4be8-bda0-b1aa4ee9bd57" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/IPlayerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/IPlayerInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/UnoTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UnoTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/improving/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/improving/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/UnoTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/UnoTests.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
