@@ -39,7 +39,7 @@ public class UnoTests {
         public void playerDrawCardShouldRemoveCardFromDrawPile(){
             //arrange
             Game game = new Game(3);
-            Player player = new Player(new ArrayList<>());
+            SmartPlayer player = new SmartPlayer(new ArrayList<>());
 
             //act
             Integer drawPileBeforeDraw = game.getDeckInfo().getDrawPileSize();
@@ -66,7 +66,7 @@ public class UnoTests {
             hand.add(new Card(Faces.DRAW_FOUR, Colors.WILD));
             hand.add(new Card(Faces.DRAW_FOUR, Colors.WILD));
 
-            Player player = new Player(hand);
+            SmartPlayer player = new SmartPlayer(hand);
 
             //act
             Integer discardPileSizeBeforePlay = game.getDeckInfo().getDiscardPile().size();
@@ -95,7 +95,7 @@ public class UnoTests {
             hand.add(new Card(Faces.DRAW_FOUR, Colors.WILD));
             hand.add(new Card(Faces.DRAW_FOUR, Colors.WILD));
 
-            Player player = new Player(hand);
+            SmartPlayer player = new SmartPlayer(hand);
 
             //act
             Integer handSizeBeforeDraw = player.handSize();
@@ -111,7 +111,7 @@ public class UnoTests {
             //arrange
             Game game = new Game(3);
             Deck deck = new Deck();
-            Player player = new Player(new ArrayList<>());
+            SmartPlayer player = new SmartPlayer(new ArrayList<>());
 
             //act
             var sizeOfDeckBeforeTopDraw = game.getDeckInfo().getDrawPileSize();
@@ -153,8 +153,8 @@ public class UnoTests {
             cards.add(new Card(Faces.TWO, Colors.BLUE));
             cards.add(new Card(Faces.THREE, Colors.RED));
 
-            Player player = new Player(cards);
-            List<Player> players = new ArrayList<>();
+            SmartPlayer player = new SmartPlayer(cards);
+            List<SmartPlayer> players = new ArrayList<>();
             players.add(player);
 
             Game game = new Game(players, 1, 1);
@@ -184,7 +184,7 @@ public class UnoTests {
         cards.add(new Card(Faces.TWO, Colors.BLUE));
         cards.add(new Card(Faces.THREE, Colors.RED));
 
-        Player player = new Player(cards);
+        SmartPlayer player = new SmartPlayer(cards);
 
         List<Card> player2Cards = new ArrayList<>();
         cards.add(new Card(Faces.FIVE, Colors.BLUE));
@@ -195,9 +195,9 @@ public class UnoTests {
         cards.add(new Card(Faces.TWO, Colors.BLUE));
         cards.add(new Card(Faces.THREE, Colors.RED));
 
-        Player player2 = new Player(player2Cards);
+        SmartPlayer player2 = new SmartPlayer(player2Cards);
 
-        List<Player> players = new ArrayList<>();
+        List<SmartPlayer> players = new ArrayList<>();
         players.add(player);
         players.add(player2);
 
@@ -212,5 +212,146 @@ public class UnoTests {
 
         //assert
         assertTrue(player2HandSizeBefore  == player2HandSizeAfter - 2);
+    }
+
+    @Test
+    public void gameNamedColorShouldBeDeclaredAsMostCommonCard(){
+        //arrange
+        List<Card> cards = new ArrayList<>();
+        Card wildCard = new Card(Faces.WILD, Colors.WILD);
+
+        cards.add(wildCard);
+        cards.add(new Card(Faces.SIX, Colors.RED));
+        cards.add(new Card(Faces.FIVE, Colors.YELLOW));
+        cards.add(new Card(Faces.FOUR, Colors.GREEN));
+        cards.add(new Card(Faces.NINE, Colors.GREEN));
+        cards.add(new Card(Faces.TWO, Colors.GREEN));
+        cards.add(new Card(Faces.THREE, Colors.GREEN));
+        SmartPlayer player = new SmartPlayer(cards);
+
+        List<SmartPlayer> players = new ArrayList<>();
+        players.add(player);
+        Game game = new Game(players, 1, 1);
+
+        //act
+        Colors mostCommonColor = player.getMostCommonColor();
+
+        //assert
+        assertEquals(mostCommonColor, Colors.GREEN);
+    }
+
+    @Test
+    public void findAllPlayableCardsReturnsListOfAllPlayableCards() {
+        //arrange
+        List<Card> cards = new ArrayList<>();
+        Card card = new Card(Faces.EIGHT, Colors.YELLOW);
+
+        cards.add(card);
+        cards.add(new Card(Faces.SIX, Colors.RED));
+        cards.add(new Card(Faces.FIVE, Colors.RED));
+        cards.add(new Card(Faces.FOUR, Colors.GREEN));
+        cards.add(new Card(Faces.EIGHT, Colors.GREEN));
+        cards.add(new Card(Faces.TWO, Colors.GREEN));
+        cards.add(new Card(Faces.THREE, Colors.GREEN));
+        SmartPlayer player = new SmartPlayer(cards);
+
+        List<SmartPlayer> players = new ArrayList<>();
+        players.add(player);
+        Game game = new Game(players, 1, 1);
+
+        List<Card> expectedPlayableCards = new ArrayList<>();
+        expectedPlayableCards.add(new Card(Faces.EIGHT, Colors.YELLOW));
+        expectedPlayableCards.add(new Card(Faces.SIX, Colors.RED));
+        expectedPlayableCards.add(new Card(Faces.FIVE, Colors.RED));
+        expectedPlayableCards.add(new Card(Faces.EIGHT, Colors.GREEN));
+
+        //act
+        game.getDeckInfo().getDiscardPile().add(new Card(Faces.EIGHT, Colors.RED));
+        var actualPlayableCards = player.findAllPlayableCards(game);
+
+        //assert
+        assertEquals(expectedPlayableCards.get(0).getColor(), actualPlayableCards.get(0).getColor());
+        assertEquals(expectedPlayableCards.get(0).getFace(), actualPlayableCards.get(0).getFace());
+        assertEquals(expectedPlayableCards.get(1).getColor(), actualPlayableCards.get(1).getColor());
+        assertEquals(expectedPlayableCards.get(1).getFace(), actualPlayableCards.get(1).getFace());
+        assertEquals(expectedPlayableCards.get(2).getColor(), actualPlayableCards.get(2).getColor());
+        assertEquals(expectedPlayableCards.get(2).getFace(), actualPlayableCards.get(2).getFace());
+        assertEquals(expectedPlayableCards.get(3).getColor(), actualPlayableCards.get(3).getColor());
+        assertEquals(expectedPlayableCards.get(3).getFace(), actualPlayableCards.get(3).getFace());
+    }
+
+    @Test
+    public void takeTurnPlaysCardWithMostCommonHandColorThatIsAlsoPlayable() {
+        //arrange
+        List<Card> cards = new ArrayList<>();
+        Card card = new Card(Faces.EIGHT, Colors.YELLOW);
+
+        cards.add(card);
+        cards.add(new Card(Faces.SIX, Colors.RED));
+        cards.add(new Card(Faces.FIVE, Colors.RED));
+        cards.add(new Card(Faces.FOUR, Colors.GREEN));
+        cards.add(new Card(Faces.EIGHT, Colors.GREEN));
+        cards.add(new Card(Faces.TWO, Colors.GREEN));
+        cards.add(new Card(Faces.THREE, Colors.GREEN));
+        SmartPlayer player = new SmartPlayer(cards);
+
+        List<SmartPlayer> players = new ArrayList<>();
+        players.add(player);
+        Game game = new Game(players, 1, 1);
+        var discardPile = game.getDeckInfo().getDiscardPile();
+
+        //act
+        discardPile.add(new Card(Faces.EIGHT, Colors.RED));
+        player.takeTurn(game);
+        var topCard = discardPile.get(discardPile.size() - 1);
+
+        //assert
+        assertEquals(topCard.getColor(), Colors.GREEN);
+        assertEquals(topCard.getFace(), Faces.EIGHT);
+    }
+
+    @Test
+    public void playerShouldPlayDrawFourIfPossibleWhenNextPlayerLessThan3CardsLeft(){
+        //arrange
+        List<Card> cards = new ArrayList<>();
+        cards.add(new Card(Faces.FIVE, Colors.BLUE));
+        cards.add(new Card(Faces.SIX, Colors.RED));
+        cards.add(new Card(Faces.DRAW_FOUR, Colors.WILD));
+        cards.add(new Card(Faces.FOUR, Colors.YELLOW));
+        cards.add(new Card(Faces.NINE, Colors.YELLOW));
+        cards.add(new Card(Faces.TWO, Colors.BLUE));
+        cards.add(new Card(Faces.THREE, Colors.RED));
+
+        SmartPlayer player = new SmartPlayer(cards);
+
+        List<Card> player2Cards = new ArrayList<>();
+        cards.add(new Card(Faces.FIVE, Colors.BLUE));
+        cards.add(new Card(Faces.SIX, Colors.BLUE));
+        cards.add(new Card(Faces.FIVE, Colors.RED));
+        cards.add(new Card(Faces.FOUR, Colors.YELLOW));
+        cards.add(new Card(Faces.NINE, Colors.YELLOW));
+        cards.add(new Card(Faces.TWO, Colors.BLUE));
+        cards.add(new Card(Faces.THREE, Colors.RED));
+
+        SmartPlayer player2 = new SmartPlayer(player2Cards);
+
+        List<SmartPlayer> players = new ArrayList<>();
+        players.add(player);
+        players.add(player2);
+
+        Game game = new Game(players, 1, 1);
+
+        List<Card> player2NewHand = new ArrayList<>();
+        player2NewHand.add(new Card(Faces.EIGHT, Colors.RED));
+        player2NewHand.add(new Card(Faces.DRAW_FOUR, Colors.WILD));
+
+        //act
+        game.getDeckInfo().getDiscardPile().add(new Card(Faces.EIGHT, Colors.RED));
+        player2.newHand(player2NewHand);
+        player.takeTurn(game);
+        int player2HandSizeAfter = game.getPlayerInfo().get(1).handSize();
+
+        //assert
+        assertEquals(player2HandSizeAfter, 6);
     }
 }

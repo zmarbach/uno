@@ -5,13 +5,13 @@ import java.util.stream.Collectors;
 
 public class Game implements IGame{
     Deck deck = new Deck();
-    List<Player> players = new ArrayList<>();
+    List<SmartPlayer> players = new ArrayList<>();
     Optional<Colors> namedColor;
     int numOfPlayers;
     int turnEngine;
     int turnDirection;
     int turnCount;
-    Player currentPlayer;
+    SmartPlayer currentPlayer;
 
     public Game(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
@@ -34,7 +34,7 @@ public class Game implements IGame{
             System.out.println("starting hand: ");
             System.out.println(playerHand.stream().map(card -> card.toString()).collect(Collectors.toList()));
 
-            Player player = new Player(playerHand);
+            SmartPlayer player = new SmartPlayer(playerHand);
             players.add(player);
             player.setName(alphabet.get(i%10));
         }
@@ -42,7 +42,7 @@ public class Game implements IGame{
     }
 
     //constructor ONLY for testing
-    public Game (List<Player> players, int turnCount, int turnDirection){
+    public Game (List<SmartPlayer> players, int turnCount, int turnDirection){
         this.players.addAll(players);
         currentPlayer = players.get(0);
         this.turnCount = turnCount;
@@ -198,7 +198,7 @@ public class Game implements IGame{
 
     private void performSpecialAction(Card card) {
         int playerPosition = players.indexOf(currentPlayer);
-        Player impactedPlayer;
+        SmartPlayer impactedPlayer;
         //DRAW TWO
         if (card.getFace().equals(Faces.DRAW_TWO)) {
             if(turnCount == 0) {

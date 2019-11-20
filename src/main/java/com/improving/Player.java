@@ -92,4 +92,10 @@ public class Player implements IPlayer {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public void newHand(List<Card> cards) {
+        this.hand.clear();
+        this.hand.addAll(cards);
+    }
 }
