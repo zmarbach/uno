@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fd81e69-5fe5-4be8-bda0-b1aa4ee9bd57" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/improving/SmartPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/GameOverException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/IPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/IPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/improving/SmartPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/improving/SmartPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/UnoTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UnoTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/improving/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/improving/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/GameOverException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/IPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/improving/IPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/improving/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/improving/SmartPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/improving/SmartPlayer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/UnoTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/UnoTests.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,7 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UnoTests.playerShouldPlayDrawFourIfPossibleWhenNextPlayerLessThan3CardsLeft">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.improving.Main" />
       <module name="uno" />
@@ -86,22 +81,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UnoTests.findAllPlayableCardsReturnsListOfAllPlayableCards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UnoTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="uno" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="UnoTests" />
-      <option name="METHOD_NAME" value="findAllPlayableCardsReturnsListOfAllPlayableCards" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UnoTests.gameNamedColorShouldBeDeclaredAsMostCommonCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="uno" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UnoTests" />
-      <option name="METHOD_NAME" value="gameNamedColorShouldBeDeclaredAsMostCommonCard" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -116,11 +100,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UnoTests.takeTurnPlaysCardWithMostCommonHandColorThatIsAlsoPlayable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UnoTests.playerShouldPlayReverseFirstIfPossibleIfNextPlayerAndNextNextPlayerBothHaveLessThanThreeCards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="uno" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="UnoTests" />
-      <option name="METHOD_NAME" value="takeTurnPlaysCardWithMostCommonHandColorThatIsAlsoPlayable" />
+      <option name="METHOD_NAME" value="playerShouldPlayReverseFirstIfPossibleIfNextPlayerAndNextNextPlayerBothHaveLessThanThreeCards" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnoTests.playerShouldPlaySkipIfPossibleWhenNextPlayerLessThan3CardsLeft" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="uno" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UnoTests" />
+      <option name="METHOD_NAME" value="playerShouldPlaySkipIfPossibleWhenNextPlayerLessThan3CardsLeft" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -128,11 +122,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UnoTests.playerShouldPlayDrawFourIfPossibleWhenNextPlayerLessThan3CardsLeft" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.UnoTests.takeTurnPlaysCardWithMostCommonHandColorThatIsAlsoPlayable" />
-        <item itemvalue="JUnit.UnoTests.findAllPlayableCardsReturnsListOfAllPlayableCards" />
-        <item itemvalue="JUnit.UnoTests.gameNamedColorShouldBeDeclaredAsMostCommonCard" />
+        <item itemvalue="JUnit.UnoTests" />
+        <item itemvalue="JUnit.UnoTests.playerShouldPlayReverseFirstIfPossibleIfNextPlayerAndNextNextPlayerBothHaveLessThanThreeCards" />
+        <item itemvalue="JUnit.UnoTests.playerShouldPlaySkipIfPossibleWhenNextPlayerLessThan3CardsLeft" />
+        <item itemvalue="JUnit.UnoTests.playerShouldPlayDrawFourIfPossibleWhenNextPlayerLessThan3CardsLeft" />
       </list>
     </recent_temporary>
   </component>
@@ -179,6 +173,47 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/improving/Player.java</url>
           <line>27</line>
           <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/Game.java</url>
+          <line>179</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/Game.java</url>
+          <line>178</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/SmartPlayer.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/SmartPlayer.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/SmartPlayer.java</url>
+          <line>122</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/SmartPlayer.java</url>
+          <line>13</line>
+          <properties class="com.improving.SmartPlayer" method="takeTurn">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/improving/SmartPlayer.java</url>
+          <line>116</line>
+          <properties class="com.improving.SmartPlayer" method="screwOtherPlayer">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

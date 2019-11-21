@@ -12,77 +12,41 @@ public class SmartPlayer implements IPlayer {
     }
 
     public void takeTurn(IGame iGame) {
-        //TODO: make player smarter by having them play playable card WITH MOST COMMON COLOR
         var mostCommonColor = getMostCommonColor();
         List<Card> cardsWithMostCommonColor = hand.stream().filter(card -> card.getColor().equals(mostCommonColor)).collect(Collectors.toList());
         List<Card> otherCards = hand.stream().filter(card -> card.getColor() != mostCommonColor).collect(Collectors.toList());
 
-        //if nextPlayer handsize < 3 play drawFour, drawTwo, skip, reverse
+        boolean ableToScrewOtherPlayer = false;
         if (iGame.getNextPlayer().handSize() < 3) {
-            screwOtherPlayer(iGame);
-            return;
+            ableToScrewOtherPlayer = screwOtherPlayer(iGame);
         }
 
-        for (Card card : cardsWithMostCommonColor) {
-            if (iGame.isPlayable(card)) {
-                if (card.getColor().equals(Colors.WILD)) {
-                    var newColor = chooseNewColorToDeclare();
-                    hand.remove(card);
-                    iGame.playCard(card, Optional.of(newColor));
-
-                    System.out.print("cards in hand for " + this.name + " : ");
-                    System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
-                    return;
-                } else {
-                    hand.remove(card);
-                    iGame.playCard(card, null);
-
-                    System.out.print("cards in hand for " + this.name + " : ");
-                    System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
+        //play normal if next player has at least 3 cards left
+        if(ableToScrewOtherPlayer == false){
+            for (Card card : cardsWithMostCommonColor) {
+                if (iGame.isPlayable(card)) {
+                    prepPlayReport(card, iGame);
                     return;
                 }
             }
-        }
 
-        for (Card card : otherCards) {
-            if (iGame.isPlayable(card)) {
-                if (card.getColor().equals(Colors.WILD)) {
-                    var newColor = this.chooseNewColorToDeclare();
-                    hand.remove(card);
-                    iGame.playCard(card, Optional.of(newColor));
-
-                    System.out.print("cards in hand for " + this.name + " : ");
-                    System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
+            for (Card card : otherCards) {
+                if (iGame.isPlayable(card)) {
+                    prepPlayReport(card, iGame);
                     return;
-                } else {
-                    hand.remove(card);
-                    iGame.playCard(card, null);
-
-                    System.out.print("cards in hand for " + this.name + " : ");
-                    System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
-                    return;
-
                 }
             }
-        }
 
-        //if CANNOT play then draw...if card matches top card on discardPile, if so play
-        var cardDrawn = this.draw(iGame);
-        System.out.println(this.name + " drew a card");
-        if (iGame.isPlayable(cardDrawn)) {
-            if (cardDrawn.getColor().equals(Colors.WILD)) {
-                var newColor = this.chooseNewColorToDeclare();
-                hand.remove(cardDrawn);
-                iGame.playCard(cardDrawn, Optional.of(newColor));
-                System.out.println(this.name + " played " + cardDrawn + " after drawing ");
-            } else {
-                hand.remove(cardDrawn);
-                iGame.playCard(cardDrawn, null);
-                System.out.println(this.name + " played " + cardDrawn + " after drawing ");
+            //if CANNOT play then draw...if card matches top card on discardPile, if so play
+            var cardDrawn = this.draw(iGame);
+            System.out.println(this.name + " drew a card");
+            if (iGame.isPlayable(cardDrawn)) {
+                prepPlayReport(cardDrawn, iGame);
+                return;
             }
+            System.out.print("cards in hand for " + this.name + " : ");
+            System.out.println(hand.stream().map(card -> card.toString()).collect(Collectors.toList()));
         }
-        System.out.print("cards in hand for " + this.name + " : ");
-        System.out.println(hand.stream().map(card -> card.toString()).collect(Collectors.toList()));
     }
 
     private List<Card> getHand() {
@@ -150,42 +114,59 @@ public class SmartPlayer implements IPlayer {
         this.hand.addAll(cards);
     }
 
-    public void screwOtherPlayer(IGame iGame) {
+    public boolean screwOtherPlayer(IGame iGame) {
         Card draw4Card = hand.stream().filter(card -> card.getFace().equals(Faces.DRAW_FOUR)).findFirst().orElse(null);
         Card draw2Card = hand.stream().filter(card -> card.getFace().equals(Faces.DRAW_TWO)).findFirst().orElse(null);
         Card skipCard = hand.stream().filter(card -> card.getFace().equals(Faces.SKIP)).findFirst().orElse(null);
         Card reverseCard = hand.stream().filter(card -> card.getFace().equals(Faces.REVERSE)).findFirst().orElse(null);
 
-        if (draw4Card != null) {
+        if ((iGame.getPlayerInfo().size() > 2 && iGame.getNextNextPlayer().handSize() > 2) || (iGame.getPlayerInfo().size() <=2)) {
+            if (draw4Card != null) {
+                prepPlayReport(draw4Card, iGame);
+                return true;
+            } else if (draw2Card != null && iGame.isPlayable(draw2Card)) {
+                prepPlayReport(draw2Card, iGame);
+                return true;
+            } else if (skipCard != null && iGame.isPlayable(skipCard)) {
+                prepPlayReport(skipCard, iGame);
+                return true;
+            } else if (reverseCard != null && iGame.isPlayable(reverseCard)) {
+                prepPlayReport(reverseCard, iGame);
+                return true;
+            }
+        }
+        else {
+            if (reverseCard != null && iGame.isPlayable(reverseCard)) {
+                    prepPlayReport(reverseCard, iGame);
+                    return true;
+            } else if (draw4Card != null) {
+                    prepPlayReport(draw4Card, iGame);
+                    return true;
+            } else if (draw2Card != null && iGame.isPlayable(draw2Card)) {
+                    prepPlayReport(draw2Card, iGame);
+                    return true;
+            } else if (skipCard != null && iGame.isPlayable(skipCard)) {
+                    prepPlayReport(skipCard, iGame);
+                    return true;
+            }
+         }
+        return false;
+    }
+
+    private void prepPlayReport(Card card, IGame iGame) {
+        if (card.getColor().equals(Colors.WILD)) {
             var newColor = chooseNewColorToDeclare();
-            hand.remove(draw4Card);
-            iGame.playCard(draw4Card, Optional.of(newColor));
+            hand.remove(card);
+            iGame.playCard(card, Optional.of(newColor));
 
             System.out.print("cards in hand for " + this.name + " : ");
             System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
-            return;
-        } else if (draw2Card != null) {
-            var newColor = chooseNewColorToDeclare();
-            hand.remove(draw2Card);
-            iGame.playCard(draw2Card, Optional.of(newColor));
+        } else {
+            hand.remove(card);
+            iGame.playCard(card, null);
 
             System.out.print("cards in hand for " + this.name + " : ");
             System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
-            return;
-        } else if (skipCard != null) {
-            hand.remove(skipCard);
-            iGame.playCard(skipCard, null);
-
-            System.out.print("cards in hand for " + this.name + " : ");
-            System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
-            return;
-        } else if (reverseCard != null) {
-            hand.remove(reverseCard);
-            iGame.playCard(reverseCard, null);
-
-            System.out.print("cards in hand for " + this.name + " : ");
-            System.out.println(hand.stream().map(c -> c.toString()).collect(Collectors.toList()));
-            return;
         }
     }
 }

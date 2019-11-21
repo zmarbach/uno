@@ -135,6 +135,7 @@ public class Game implements IGame{
 
     @Override
     public List<IPlayerInfo> getPlayerInfo() {
+
         return new ArrayList<>(players);
     }
 
@@ -166,9 +167,13 @@ public class Game implements IGame{
     }
 
     public IPlayer getNextNextPlayer() {
-        //return first player if current player is last in list
+        //return first player if current player is second to last in list
         if(players.indexOf(currentPlayer) == players.size() - 2){
             return players.get(0);
+        }
+        //return first player if current player is second to last in list
+        if(players.indexOf(currentPlayer) == players.size() - 1){
+            return players.get(1);
         }
         //otherwise return player at next next index
         else {

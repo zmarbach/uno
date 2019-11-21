@@ -354,4 +354,97 @@ public class UnoTests {
         //assert
         assertEquals(player2HandSizeAfter, 6);
     }
+
+    @Test
+    public void playerShouldPlaySkipIfPossibleWhenNextPlayerLessThan3CardsLeft(){
+        //arrange
+        List<Card> cards = new ArrayList<>();
+        cards.add(new Card(Faces.NINE, Colors.RED));
+        cards.add(new Card(Faces.SIX, Colors.BLUE));
+        cards.add(new Card(Faces.SKIP, Colors.BLUE));
+        cards.add(new Card(Faces.FOUR, Colors.YELLOW));
+        cards.add(new Card(Faces.REVERSE, Colors.BLUE));
+        cards.add(new Card(Faces.TWO, Colors.BLUE));
+        cards.add(new Card(Faces.THREE, Colors.GREEN));
+
+        SmartPlayer player = new SmartPlayer(cards);
+
+        List<Card> player2Cards = new ArrayList<>();
+        cards.add(new Card(Faces.FIVE, Colors.BLUE));
+        cards.add(new Card(Faces.SIX, Colors.BLUE));
+        cards.add(new Card(Faces.FIVE, Colors.RED));
+        cards.add(new Card(Faces.FOUR, Colors.YELLOW));
+        cards.add(new Card(Faces.NINE, Colors.YELLOW));
+        cards.add(new Card(Faces.TWO, Colors.BLUE));
+        cards.add(new Card(Faces.THREE, Colors.RED));
+
+        SmartPlayer player2 = new SmartPlayer(player2Cards);
+
+        List<SmartPlayer> players = new ArrayList<>();
+        players.add(player);
+        players.add(player2);
+
+        Game game = new Game(players, 1, 1);
+
+        List<Card> player2NewHand = new ArrayList<>();
+        player2NewHand.add(new Card(Faces.TWO, Colors.RED));
+        player2NewHand.add(new Card(Faces.DRAW_FOUR, Colors.WILD));
+
+        //act
+        game.getDeckInfo().getDiscardPile().add(new Card(Faces.TWO, Colors.BLUE));
+        player2.newHand(player2NewHand);
+        player.takeTurn(game);
+        var cardPlayed = game.getDeckInfo().getDiscardPile().get(game.getDeckInfo().getDiscardPile().size() - 1);
+        System.out.println(cardPlayed.toString());
+
+        //assert
+        assertEquals(cardPlayed.getFace(), Faces.SKIP);
+        assertEquals(cardPlayed.getColor(), Colors.BLUE);
+    }
+
+    @Test
+    public void playerShouldPlayReverseFirstIfPossibleIfNextPlayerAndNextNextPlayerBothHaveLessThanThreeCards(){
+        //arrange
+        List<Card> cards = new ArrayList<>();
+        cards.add(new Card(Faces.FIVE, Colors.BLUE));
+        cards.add(new Card(Faces.EIGHT, Colors.BLUE));
+        cards.add(new Card(Faces.SKIP, Colors.RED));
+        cards.add(new Card(Faces.FOUR, Colors.YELLOW));
+        cards.add(new Card(Faces.REVERSE, Colors.RED));
+        cards.add(new Card(Faces.SEVEN, Colors.GREEN));
+        cards.add(new Card(Faces.THREE, Colors.RED));
+
+        SmartPlayer player1 = new SmartPlayer(cards);
+
+        List<Card> player2Cards = new ArrayList<>();
+        SmartPlayer player2 = new SmartPlayer(player2Cards);
+
+        List<Card> player3Cards = new ArrayList<>();
+        SmartPlayer player3 = new SmartPlayer(player3Cards);
+
+        List<SmartPlayer> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+
+        Game game = new Game(players, 1, 1);
+
+        List<Card> player2NewHand = new ArrayList<>();
+        player2NewHand.add(new Card(Faces.EIGHT, Colors.RED));
+        player2NewHand.add(new Card(Faces.DRAW_FOUR, Colors.WILD));
+
+        List<Card> player3NewHand = new ArrayList<>();
+        player3NewHand.add(new Card(Faces.NINE, Colors.RED));
+        player3NewHand.add(new Card(Faces.DRAW_TWO, Colors.WILD));
+
+        //act
+        game.getDeckInfo().getDiscardPile().add(new Card(Faces.EIGHT, Colors.RED));
+        player2.newHand(player2NewHand);
+        player3.newHand(player3NewHand);
+        player1.takeTurn(game);
+        var cardPlayed = game.getDeckInfo().getDiscardPile().get(game.getDeckInfo().getDiscardPile().size() - 1);
+
+        //assert
+        assertEquals(cardPlayed.getFace(), Faces.REVERSE);
+    }
 }
